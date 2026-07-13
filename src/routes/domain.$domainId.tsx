@@ -36,7 +36,7 @@ function DomainView() {
         {domain.items.length} topics
       </p>
       <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
-        {domain.items.map((it) => (
+        {domain.items.map((it: (typeof domain.items)[number]) => (
           <li key={it.id}>
             <Link
               to="/domain/$domainId/item/$itemId"

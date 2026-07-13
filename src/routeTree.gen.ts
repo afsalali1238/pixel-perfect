@@ -9,38 +9,128 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as RapidRecallRouteImport } from './routes/rapid-recall'
+import { Route as ProbeRouteImport } from './routes/probe'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DomainDomainIdRouteImport } from './routes/domain.$domainId'
+import { Route as DomainDomainIdItemItemIdRouteImport } from './routes/domain.$domainId.item.$itemId'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RapidRecallRoute = RapidRecallRouteImport.update({
+  id: '/rapid-recall',
+  path: '/rapid-recall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProbeRoute = ProbeRouteImport.update({
+  id: '/probe',
+  path: '/probe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DomainDomainIdRoute = DomainDomainIdRouteImport.update({
+  id: '/domain/$domainId',
+  path: '/domain/$domainId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DomainDomainIdItemItemIdRoute =
+  DomainDomainIdItemItemIdRouteImport.update({
+    id: '/item/$itemId',
+    path: '/item/$itemId',
+    getParentRoute: () => DomainDomainIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/probe': typeof ProbeRoute
+  '/rapid-recall': typeof RapidRecallRoute
+  '/search': typeof SearchRoute
+  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
+  '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/probe': typeof ProbeRoute
+  '/rapid-recall': typeof RapidRecallRoute
+  '/search': typeof SearchRoute
+  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
+  '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/probe': typeof ProbeRoute
+  '/rapid-recall': typeof RapidRecallRoute
+  '/search': typeof SearchRoute
+  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
+  '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/probe'
+    | '/rapid-recall'
+    | '/search'
+    | '/domain/$domainId'
+    | '/domain/$domainId/item/$itemId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/probe'
+    | '/rapid-recall'
+    | '/search'
+    | '/domain/$domainId'
+    | '/domain/$domainId/item/$itemId'
+  id:
+    | '__root__'
+    | '/'
+    | '/probe'
+    | '/rapid-recall'
+    | '/search'
+    | '/domain/$domainId'
+    | '/domain/$domainId/item/$itemId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProbeRoute: typeof ProbeRoute
+  RapidRecallRoute: typeof RapidRecallRoute
+  SearchRoute: typeof SearchRoute
+  DomainDomainIdRoute: typeof DomainDomainIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rapid-recall': {
+      id: '/rapid-recall'
+      path: '/rapid-recall'
+      fullPath: '/rapid-recall'
+      preLoaderRoute: typeof RapidRecallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/probe': {
+      id: '/probe'
+      path: '/probe'
+      fullPath: '/probe'
+      preLoaderRoute: typeof ProbeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +138,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/domain/$domainId': {
+      id: '/domain/$domainId'
+      path: '/domain/$domainId'
+      fullPath: '/domain/$domainId'
+      preLoaderRoute: typeof DomainDomainIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/domain/$domainId/item/$itemId': {
+      id: '/domain/$domainId/item/$itemId'
+      path: '/item/$itemId'
+      fullPath: '/domain/$domainId/item/$itemId'
+      preLoaderRoute: typeof DomainDomainIdItemItemIdRouteImport
+      parentRoute: typeof DomainDomainIdRoute
+    }
   }
 }
 
+interface DomainDomainIdRouteChildren {
+  DomainDomainIdItemItemIdRoute: typeof DomainDomainIdItemItemIdRoute
+}
+
+const DomainDomainIdRouteChildren: DomainDomainIdRouteChildren = {
+  DomainDomainIdItemItemIdRoute: DomainDomainIdItemItemIdRoute,
+}
+
+const DomainDomainIdRouteWithChildren = DomainDomainIdRoute._addFileChildren(
+  DomainDomainIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProbeRoute: ProbeRoute,
+  RapidRecallRoute: RapidRecallRoute,
+  SearchRoute: SearchRoute,
+  DomainDomainIdRoute: DomainDomainIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

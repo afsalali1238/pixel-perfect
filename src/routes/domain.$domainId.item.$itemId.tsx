@@ -63,7 +63,7 @@ function ItemView() {
               Key facts
             </h2>
             <ul className="space-y-2 rounded-lg border border-border bg-card p-4 text-sm leading-relaxed text-card-foreground">
-              {item.key_facts.map((f, i) => (
+              {item.key_facts.map((f: string, i: number) => (
                 <li key={i} className="flex gap-3">
                   <span
                     aria-hidden
@@ -83,7 +83,7 @@ function ItemView() {
                 Sources
               </p>
               <ul className="mt-1 space-y-0.5 text-xs text-muted-foreground">
-                {item.sources.map((s, i) => (
+                {item.sources.map((s: string, i: number) => (
                   <li key={i}>• {s}</li>
                 ))}
               </ul>
