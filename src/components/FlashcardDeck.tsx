@@ -76,20 +76,26 @@ export function FlashcardDeck({
       </div>
 
       <div 
-        className="group relative w-full cursor-pointer"
+        className="group relative w-full cursor-pointer perspective-1000"
         style={{ perspective: "1000px" }}
         onClick={() => setFlipped(!flipped)}
       >
-        <motion.div
-          className="relative w-full rounded-xl border border-border bg-card text-center text-card-foreground shadow-sm transition-colors hover:border-primary/40 grid"
-          animate={{ rotateX: flipped ? 180 : 0 }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 260, damping: 20 }}
-          style={{ transformStyle: "preserve-3d" }}
-        >
+        <div className="relative grid w-full rounded-xl border border-border bg-card text-center text-card-foreground shadow-sm transition-colors hover:border-primary/40">
+          
           {/* Front */}
-          <div 
+          <motion.div 
             className="col-start-1 row-start-1 flex min-h-64 flex-col items-center justify-center gap-3 p-6 sm:p-8"
-            style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+            initial={false}
+            animate={{ 
+              rotateX: flipped ? 90 : 0, 
+              opacity: flipped ? 0 : 1 
+            }}
+            transition={{ 
+              duration: 0.2, 
+              delay: flipped ? 0 : 0.2,
+              ease: "easeInOut"
+            }}
+            style={{ transformOrigin: "center" }}
           >
             <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
               Question
@@ -98,12 +104,22 @@ export function FlashcardDeck({
             <span className="mt-2 text-xs text-muted-foreground">
               Tap or press Space to reveal answer
             </span>
-          </div>
+          </motion.div>
 
           {/* Back */}
-          <div 
+          <motion.div 
             className="col-start-1 row-start-1 flex min-h-64 flex-col items-center justify-center gap-3 p-6 sm:p-8"
-            style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateX(180deg)" }}
+            initial={false}
+            animate={{ 
+              rotateX: flipped ? 0 : -90, 
+              opacity: flipped ? 1 : 0 
+            }}
+            transition={{ 
+              duration: 0.2, 
+              delay: flipped ? 0.2 : 0,
+              ease: "easeInOut"
+            }}
+            style={{ transformOrigin: "center" }}
           >
             <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
               Answer
@@ -112,8 +128,9 @@ export function FlashcardDeck({
             <span className="mt-2 text-xs text-muted-foreground">
               1 / &larr; to Review | 2 / &rarr; for Got it
             </span>
-          </div>
-        </motion.div>
+          </motion.div>
+          
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
