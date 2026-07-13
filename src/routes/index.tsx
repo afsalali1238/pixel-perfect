@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Search, Zap, MessagesSquare, ArrowRight } from "lucide-react";
+import { useState, useRef } from "react";
+import { Search, Zap, MessagesSquare, ArrowRight, Download, Upload } from "lucide-react";
 import { domains } from "@/data/cdt";
 import { useProgress } from "@/lib/progress";
 import { Input } from "@/components/ui/input";
 import { PageShell } from "@/components/PageShell";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,6 +25,34 @@ function Home() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
   const progress = useProgress();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleExport = () => {
+    const data = progress.exportProgress();
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `cdt_progress_${new Date().toISOString().split("T")[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const json = ev.target?.result as string;
+      if (progress.importProgress(json)) {
+        alert("Progress restored successfully!");
+      } else {
+        alert("Invalid progress file.");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
 
   return (
     <PageShell title="CDT Study">
@@ -102,6 +131,30 @@ function Home() {
             </Link>
           );
         })}
+      </div>
+
+      <div className="mt-12 flex flex-col gap-3 rounded-xl border border-border bg-card p-5">
+        <h3 className="text-sm font-semibold text-card-foreground">Data &amp; Progress</h3>
+        <p className="text-xs text-muted-foreground">
+          Your progress is saved locally in your browser. You can export it as a backup or import it on another device.
+        </p>
+        <div className="mt-2 flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleExport} className="w-full">
+            <Download className="mr-2 h-4 w-4" />
+            Backup
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="w-full">
+            <Upload className="mr-2 h-4 w-4" />
+            Restore
+          </Button>
+          <input
+            type="file"
+            accept=".json"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleImport}
+          />
+        </div>
       </div>
     </PageShell>
   );

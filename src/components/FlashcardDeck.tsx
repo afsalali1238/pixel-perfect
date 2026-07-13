@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Flashcard as FC } from "@/data/cdt";
-import { useProgress, cardKey, type Mastery } from "@/lib/progress";
+import { useProgress, type Mastery } from "@/lib/progress";
 
 export function FlashcardDeck({
   cards,
@@ -15,15 +16,9 @@ export function FlashcardDeck({
   const [flipped, setFlipped] = useState(false);
   const progress = useProgress();
 
-  if (cards.length === 0) {
-    return <p className="text-sm text-muted-foreground">No flashcards for this item.</p>;
-  }
-
-  const card = cards[idx];
   const isLast = idx === cards.length - 1;
-  const mastery = keyFor ? progress.getMastery(keyFor(idx)) : undefined;
 
-  const advance = (m?: Mastery) => {
+  const advance = useCallback((m?: Mastery) => {
     if (m && keyFor) progress.markCard(keyFor(idx), m);
     if (isLast) {
       setIdx(0);
@@ -31,7 +26,35 @@ export function FlashcardDeck({
       setIdx((i) => i + 1);
     }
     setFlipped(false);
-  };
+  }, [idx, isLast, keyFor, progress]);
+
+  useEffect(() => {
+    if (cards.length === 0) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if inside an input
+      if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA") return;
+      
+      if (e.code === "Space") {
+        e.preventDefault();
+        setFlipped((f) => !f);
+      } else if (e.key === "1" || e.code === "ArrowLeft") {
+        e.preventDefault();
+        advance("review");
+      } else if (e.key === "2" || e.code === "ArrowRight") {
+        e.preventDefault();
+        advance("mastered");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [advance, cards.length]);
+
+  if (cards.length === 0) {
+    return <p className="text-sm text-muted-foreground">No flashcards for this item.</p>;
+  }
+
+  const card = cards[idx];
+  const mastery = keyFor ? progress.getMastery(keyFor(idx)) : undefined;
 
   return (
     <div className="flex flex-col gap-4">
@@ -52,21 +75,46 @@ export function FlashcardDeck({
         ) : null}
       </div>
 
-      <button
-        type="button"
-        onClick={() => setFlipped((f) => !f)}
-        className="group relative flex min-h-64 w-full items-center justify-center rounded-xl border border-border bg-card p-6 text-center text-card-foreground shadow-sm transition hover:border-primary/40"
+      <div 
+        className="group relative min-h-64 w-full cursor-pointer"
+        style={{ perspective: "1000px" }}
+        onClick={() => setFlipped(!flipped)}
       >
-        <div className="flex flex-col gap-3">
-          <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-            {flipped ? "Answer" : "Question"}
-          </span>
-          <p className="text-lg leading-relaxed sm:text-xl">{flipped ? card.back : card.front}</p>
-          <span className="mt-2 text-xs text-muted-foreground">
-            Tap to {flipped ? "see question" : "reveal answer"}
-          </span>
-        </div>
-      </button>
+        <motion.div
+          className="relative h-full w-full rounded-xl border border-border bg-card p-6 text-center text-card-foreground shadow-sm transition-colors hover:border-primary/40"
+          animate={{ rotateX: flipped ? 180 : 0 }}
+          transition={{ duration: 0.4, type: "spring", stiffness: 260, damping: 20 }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* Front */}
+          <div 
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
+            style={{ backfaceVisibility: "hidden" }}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+              Question
+            </span>
+            <p className="text-lg leading-relaxed sm:text-xl">{card.front}</p>
+            <span className="mt-2 text-xs text-muted-foreground">
+              Tap or press Space to reveal answer
+            </span>
+          </div>
+
+          {/* Back */}
+          <div 
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
+            style={{ backfaceVisibility: "hidden", transform: "rotateX(180deg)" }}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
+              Answer
+            </span>
+            <p className="text-lg leading-relaxed sm:text-xl">{card.back}</p>
+            <span className="mt-2 text-xs text-muted-foreground">
+              1 / &larr; to Review | 2 / &rarr; for Got it
+            </span>
+          </div>
+        </motion.div>
+      </div>
 
       <div className="grid grid-cols-2 gap-3">
         <Button
@@ -76,14 +124,14 @@ export function FlashcardDeck({
           className="h-12 border-warning text-warning-foreground hover:bg-warning-soft"
         >
           <RotateCcw className="mr-2 h-4 w-4" />
-          Review again
+          Review again [1]
         </Button>
         <Button
           type="button"
           onClick={() => advance("mastered")}
           className="h-12 bg-success text-success-foreground hover:bg-success/90"
         >
-          Got it
+          Got it [2]
         </Button>
       </div>
     </div>

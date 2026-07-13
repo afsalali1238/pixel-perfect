@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { QuizQuestion } from "@/data/cdt";
 
@@ -22,13 +23,59 @@ export function QuizRunner({
   const q = questions[idx];
   const explanation = useMemo(() => explanations?.[idx], [explanations, idx]);
 
+  const handlePick = (i: number) => {
+    if (picked !== null) return;
+    setPicked(i);
+    if (i === q.answer) {
+      setScore((s) => s + 1);
+    } else {
+      setMisses((m) => [...m, { q, picked: i }]);
+    }
+  };
+
+  const handleNext = () => {
+    if (idx + 1 >= total) {
+      setDone(true);
+    } else {
+      setIdx((i) => i + 1);
+      setPicked(null);
+    }
+  };
+
+  useEffect(() => {
+    if (total === 0 || done) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA") return;
+      
+      if (picked === null) {
+        if (e.key === "1") handlePick(0);
+        else if (e.key === "2" && q.options.length > 1) handlePick(1);
+        else if (e.key === "3" && q.options.length > 2) handlePick(2);
+        else if (e.key === "4" && q.options.length > 3) handlePick(3);
+      } else {
+        if (e.code === "Space" || e.code === "Enter") {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [picked, idx, done, total, q]);
+
   if (total === 0) {
     return <p className="text-sm text-muted-foreground">No quiz questions for this item.</p>;
   }
 
   if (done) {
     return (
-      <div className="flex flex-col gap-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col gap-4"
+      >
         <div className="rounded-xl border border-border bg-card p-5">
           <h3 className="text-lg font-semibold">Quiz complete</h3>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -65,7 +112,7 @@ export function QuizRunner({
         >
           Restart quiz
         </Button>
-      </div>
+      </motion.div>
     );
   }
 
@@ -80,9 +127,15 @@ export function QuizRunner({
         <span>Score: {score}</span>
       </div>
 
-      <div className="rounded-xl border border-border bg-card p-5">
+      <motion.div 
+        key={idx}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
+        className="rounded-xl border border-border bg-card p-5"
+      >
         <p className="text-base font-medium leading-relaxed sm:text-lg">{q.question}</p>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col gap-2">
         {q.options.map((opt, i) => {
@@ -94,17 +147,10 @@ export function QuizRunner({
               key={i}
               type="button"
               disabled={picked !== null}
-              onClick={() => {
-                setPicked(i);
-                if (i === q.answer) {
-                  setScore((s) => s + 1);
-                } else {
-                  setMisses((m) => [...m, { q, picked: i }]);
-                }
-              }}
+              onClick={() => handlePick(i)}
               className={cn(
-                "flex items-start gap-3 rounded-lg border p-4 text-left text-sm transition",
-                "min-h-11",
+                "group flex items-start gap-3 rounded-lg border p-4 text-left text-sm transition-all",
+                "min-h-11 relative overflow-hidden",
                 picked === null
                   ? "border-border bg-card hover:border-primary/40 hover:bg-accent"
                   : "cursor-default",
@@ -113,46 +159,52 @@ export function QuizRunner({
                 picked !== null && !selected && !revealCorrect && "opacity-60",
               )}
             >
-              <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full border border-current text-[11px] font-semibold leading-5 text-center">
-                {String.fromCharCode(65 + i)}
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-current text-[11px] font-semibold text-center">
+                {i + 1}
               </span>
-              <span className="flex-1">{opt}</span>
-              {revealCorrect ? <Check className="h-5 w-5 shrink-0 text-success" /> : null}
-              {revealWrong ? <X className="h-5 w-5 shrink-0 text-destructive" /> : null}
+              <span className="flex-1 z-10">{opt}</span>
+              {revealCorrect ? <Check className="h-5 w-5 shrink-0 text-success z-10" /> : null}
+              {revealWrong ? <X className="h-5 w-5 shrink-0 text-destructive z-10" /> : null}
             </button>
           );
         })}
       </div>
 
-      {picked !== null ? (
-        <div
-          className={cn(
-            "rounded-lg border p-4 text-sm",
-            isCorrect
-              ? "border-success/40 bg-success/10 text-success-foreground"
-              : "border-destructive/40 bg-destructive/10 text-destructive",
-          )}
-        >
-          <p className="font-semibold">{isCorrect ? "Correct" : "Not quite"}</p>
-          {explanation ? <p className="mt-1 text-foreground/80">{explanation}</p> : null}
-        </div>
-      ) : null}
+      <AnimatePresence>
+        {picked !== null ? (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0 }}
+            className={cn(
+              "rounded-lg border p-4 text-sm overflow-hidden",
+              isCorrect
+                ? "border-success/40 bg-success/10 text-success-foreground"
+                : "border-destructive/40 bg-destructive/10 text-destructive",
+            )}
+          >
+            <p className="font-semibold">{isCorrect ? "Correct" : "Not quite"}</p>
+            {explanation ? <p className="mt-1 text-foreground/80">{explanation}</p> : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
-      {picked !== null ? (
-        <Button
-          className="h-12"
-          onClick={() => {
-            if (idx + 1 >= total) {
-              setDone(true);
-            } else {
-              setIdx((i) => i + 1);
-              setPicked(null);
-            }
-          }}
-        >
-          {idx + 1 >= total ? "See results" : "Next question"}
-        </Button>
-      ) : null}
+      <AnimatePresence>
+        {picked !== null ? (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            <Button
+              className="h-12 w-full mt-2"
+              onClick={handleNext}
+            >
+              {idx + 1 >= total ? "See results" : "Next question (Space)"}
+            </Button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }
