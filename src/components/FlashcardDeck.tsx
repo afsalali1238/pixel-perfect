@@ -13,7 +13,9 @@ export function FlashcardDeck({
 }) {
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const progress = keyFor ? useProgress() : null;
+  const progress = useProgress();
+
+
 
   if (cards.length === 0) {
     return <p className="text-sm text-muted-foreground">No flashcards for this item.</p>;
@@ -21,10 +23,10 @@ export function FlashcardDeck({
 
   const card = cards[idx];
   const isLast = idx === cards.length - 1;
-  const mastery = keyFor && progress ? progress.getMastery(keyFor(idx)) : undefined;
+  const mastery = keyFor ? progress.getMastery(keyFor(idx)) : undefined;
 
   const advance = (m?: Mastery) => {
-    if (m && keyFor && progress) progress.markCard(keyFor(idx), m);
+    if (m && keyFor) progress.markCard(keyFor(idx), m);
     if (isLast) {
       setIdx(0);
     } else {
