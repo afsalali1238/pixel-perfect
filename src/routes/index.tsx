@@ -85,9 +85,7 @@ function Home() {
               className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-5 transition hover:border-primary/50 hover:shadow-sm"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-base font-semibold text-card-foreground">
-                  {d.name}
-                </h3>
+                <h3 className="text-base font-semibold text-card-foreground">{d.name}</h3>
                 <span className="rounded-full bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
                   {d.items.length} topics
                 </span>
@@ -98,10 +96,7 @@ function Home() {
                   <span className="font-medium text-foreground">{pct}%</span>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className="h-full bg-primary transition-all"
-                    style={{ width: `${pct}%` }}
-                  />
+                  <div className="h-full bg-primary transition-all" style={{ width: `${pct}%` }} />
                 </div>
               </div>
             </Link>

@@ -32,9 +32,7 @@ function DomainView() {
   const { domain } = Route.useLoaderData();
   return (
     <PageShell title={domain.name} back={{ to: "/", label: "Home" }}>
-      <p className="mb-4 text-sm text-muted-foreground">
-        {domain.items.length} topics
-      </p>
+      <p className="mb-4 text-sm text-muted-foreground">{domain.items.length} topics</p>
       <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
         {domain.items.map((it: (typeof domain.items)[number]) => (
           <li key={it.id}>
@@ -43,9 +41,7 @@ function DomainView() {
               params={{ domainId: domain.id, itemId: it.id }}
               className="flex min-h-14 items-center justify-between gap-3 px-4 py-3 transition hover:bg-accent"
             >
-              <span className="text-sm font-medium text-card-foreground">
-                {it.title}
-              </span>
+              <span className="text-sm font-medium text-card-foreground">{it.title}</span>
               <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
             </Link>
           </li>

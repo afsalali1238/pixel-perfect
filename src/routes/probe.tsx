@@ -20,8 +20,8 @@ function Probe() {
   return (
     <PageShell title="Assessor Probe Q&A" back={{ to: "/", label: "Home" }}>
       <p className="mb-4 text-sm text-muted-foreground">
-        {probeQuestions.length} probe questions. Read the prompt, say your answer
-        out loud, then flip.
+        {probeQuestions.length} probe questions. Read the prompt, say your answer out loud, then
+        flip.
       </p>
       <ProbeDeck items={probeQuestions} />
     </PageShell>

@@ -46,9 +46,7 @@ export function QuizRunner({
                 <p className="mt-2 text-sm text-destructive">
                   Your answer: {m.q.options[m.picked]}
                 </p>
-                <p className="mt-1 text-sm text-success">
-                  Correct: {m.q.options[m.q.answer]}
-                </p>
+                <p className="mt-1 text-sm text-success">Correct: {m.q.options[m.q.answer]}</p>
               </div>
             ))}
           </div>

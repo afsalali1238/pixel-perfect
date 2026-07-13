@@ -14,7 +14,7 @@ import { Route as RapidRecallRouteImport } from './routes/rapid-recall'
 import { Route as ProbeRouteImport } from './routes/probe'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DomainDomainIdRouteImport } from './routes/domain.$domainId'
-import { Route as DomainDomainIdItemItemIdRouteImport } from './routes/domain.$domainId.item.$itemId'
+import { Route as DomainDomainIdItemItemIdRouteImport } from './routes/domain.$domainId_.item.$itemId'
 
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
@@ -43,9 +43,9 @@ const DomainDomainIdRoute = DomainDomainIdRouteImport.update({
 } as any)
 const DomainDomainIdItemItemIdRoute =
   DomainDomainIdItemItemIdRouteImport.update({
-    id: '/item/$itemId',
-    path: '/item/$itemId',
-    getParentRoute: () => DomainDomainIdRoute,
+    id: '/domain/$domainId_/item/$itemId',
+    path: '/domain/$domainId/item/$itemId',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -53,7 +53,7 @@ export interface FileRoutesByFullPath {
   '/probe': typeof ProbeRoute
   '/rapid-recall': typeof RapidRecallRoute
   '/search': typeof SearchRoute
-  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
+  '/domain/$domainId': typeof DomainDomainIdRoute
   '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRoutesByTo {
@@ -61,7 +61,7 @@ export interface FileRoutesByTo {
   '/probe': typeof ProbeRoute
   '/rapid-recall': typeof RapidRecallRoute
   '/search': typeof SearchRoute
-  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
+  '/domain/$domainId': typeof DomainDomainIdRoute
   '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRoutesById {
@@ -70,8 +70,8 @@ export interface FileRoutesById {
   '/probe': typeof ProbeRoute
   '/rapid-recall': typeof RapidRecallRoute
   '/search': typeof SearchRoute
-  '/domain/$domainId': typeof DomainDomainIdRouteWithChildren
-  '/domain/$domainId/item/$itemId': typeof DomainDomainIdItemItemIdRoute
+  '/domain/$domainId': typeof DomainDomainIdRoute
+  '/domain/$domainId_/item/$itemId': typeof DomainDomainIdItemItemIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,7 +97,7 @@ export interface FileRouteTypes {
     | '/rapid-recall'
     | '/search'
     | '/domain/$domainId'
-    | '/domain/$domainId/item/$itemId'
+    | '/domain/$domainId_/item/$itemId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,7 +105,8 @@ export interface RootRouteChildren {
   ProbeRoute: typeof ProbeRoute
   RapidRecallRoute: typeof RapidRecallRoute
   SearchRoute: typeof SearchRoute
-  DomainDomainIdRoute: typeof DomainDomainIdRouteWithChildren
+  DomainDomainIdRoute: typeof DomainDomainIdRoute
+  DomainDomainIdItemItemIdRoute: typeof DomainDomainIdItemItemIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -145,34 +146,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DomainDomainIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/domain/$domainId/item/$itemId': {
-      id: '/domain/$domainId/item/$itemId'
-      path: '/item/$itemId'
+    '/domain/$domainId_/item/$itemId': {
+      id: '/domain/$domainId_/item/$itemId'
+      path: '/domain/$domainId/item/$itemId'
       fullPath: '/domain/$domainId/item/$itemId'
       preLoaderRoute: typeof DomainDomainIdItemItemIdRouteImport
-      parentRoute: typeof DomainDomainIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface DomainDomainIdRouteChildren {
-  DomainDomainIdItemItemIdRoute: typeof DomainDomainIdItemItemIdRoute
-}
-
-const DomainDomainIdRouteChildren: DomainDomainIdRouteChildren = {
-  DomainDomainIdItemItemIdRoute: DomainDomainIdItemItemIdRoute,
-}
-
-const DomainDomainIdRouteWithChildren = DomainDomainIdRoute._addFileChildren(
-  DomainDomainIdRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProbeRoute: ProbeRoute,
   RapidRecallRoute: RapidRecallRoute,
   SearchRoute: SearchRoute,
-  DomainDomainIdRoute: DomainDomainIdRouteWithChildren,
+  DomainDomainIdRoute: DomainDomainIdRoute,
+  DomainDomainIdItemItemIdRoute: DomainDomainIdItemItemIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

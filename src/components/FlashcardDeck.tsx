@@ -15,8 +15,6 @@ export function FlashcardDeck({
   const [flipped, setFlipped] = useState(false);
   const progress = useProgress();
 
-
-
   if (cards.length === 0) {
     return <p className="text-sm text-muted-foreground">No flashcards for this item.</p>;
   }
@@ -63,9 +61,7 @@ export function FlashcardDeck({
           <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
             {flipped ? "Answer" : "Question"}
           </span>
-          <p className="text-lg leading-relaxed sm:text-xl">
-            {flipped ? card.back : card.front}
-          </p>
+          <p className="text-lg leading-relaxed sm:text-xl">{flipped ? card.back : card.front}</p>
           <span className="mt-2 text-xs text-muted-foreground">
             Tap to {flipped ? "see question" : "reveal answer"}
           </span>

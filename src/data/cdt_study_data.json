@@ -31,12 +31,13 @@
           "key_facts": [
             "Lymphedema ISL staging: Stage 0 (subclinical, no visible swelling) → I (pits, subsides with elevation) → II (non-pitting, fibrosis) → III (elephantiasis, trophic skin changes)",
             "Lipedema: Types 1-5 (anatomical distribution: I=pelvis/hips, IV=arms, V=lower legs only) and Stages 1-3 (smooth skin → nodular/lobular)",
-            "'Stage 4 Lipedema' is outdated — current term is lipo-lymphedema (lymphatic microcirculation is compromised across all lipedema stages, not just end-stage)"
+            "'Stage 4 Lipedema' is outdated — current term is lipo-lymphedema (lymphatic microcirculation is compromised across all lipedema stages, not just end-stage)",
+            "2025 update (Herbst et al.): intermediate stages 1.5 and 2.5 proposed to capture transitional smooth→textured→lobular presentations that don't cleanly fit Stage 1/2/3"
           ],
           "pitfalls": [
             "Saying 'Stage 4 Lipedema' instead of lipo-lymphedema is an immediate red flag for outdated terminology"
           ],
-          "sources": ["ISL 2023 Consensus Document", "Lipedema Standard of Care Guidelines"],
+          "sources": ["ISL 2023 Consensus Document", "Lipedema Standard of Care Guidelines", "Herbst et al. 2025 staging update"],
           "flashcards": [
             {"front": "Lymphedema ISL Stage II features?", "back": "Non-pitting, permanent swelling with progressive fibrosis"},
             {"front": "What replaced the outdated term 'Stage 4 Lipedema'?", "back": "Lipo-lymphedema"},
@@ -101,7 +102,7 @@
           "title": "Chart & Record Review",
           "key_facts": [
             "For secondary lymphedema: verify ALND vs SLNB, number of nodes excised, radiation fields",
-            "ALND + regional radiation: ~40% lymphedema risk. SLNB: <10% risk",
+            "ALND alone: ~19-25% lymphedema risk; SLNB alone: ~2-8% risk (roughly 65% relative risk reduction vs. ALND). Adding regional nodal radiation to ALND pushes risk toward the upper end of published cohorts (up to ~40% in some studies) — radiation is an additive risk factor, not a separate fixed number",
             "Taxane chemo agents cause fluid retention AND peripheral neuropathy — alters compression safety",
             "Must confirm current malignancy status (remission vs active/palliative) before starting CDT"
           ],
@@ -110,7 +111,7 @@
           ],
           "sources": ["ISL 2023 Consensus Document"],
           "flashcards": [
-            {"front": "Lymphedema risk: ALND + radiation vs. SLNB alone?", "back": "~40% (ALND+radiation) vs. <10% (SLNB)"},
+            {"front": "Lymphedema risk: ALND alone vs. SLNB alone vs. ALND+regional radiation?", "back": "ALND ~19-25%, SLNB ~2-8%; adding regional nodal radiation to ALND pushes risk toward the upper end of cohorts (up to ~40%) — radiation is additive, not a separate fixed rate"},
             {"front": "Why do taxane chemo agents matter for compression safety?", "back": "They cause peripheral neuropathy, altering the patient's ability to tolerate/sense compression safely"}
           ],
           "quiz_questions": [
@@ -134,7 +135,9 @@
             {"front": "What onset pattern is a red flag for vascular occlusion or infection?", "back": "Sudden onset swelling"},
             {"front": "Key diagnostic clue distinguishing lipedema fat from obesity?", "back": "Lipedema fat resists caloric restriction and bariatric surgery"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A patient describes swelling that developed suddenly over 24 hours, with associated pain. This onset pattern should raise suspicion for:", "options": ["Gradual lymphatic failure", "Vascular occlusion or infection — a red flag requiring urgent screening", "Normal lipedema progression", "Dietary sodium intake"], "answer": 1}
+          ]
         },
         {
           "id": "a7",
@@ -153,7 +156,9 @@
             {"front": "Sudden hard, fixed, non-mobile lymph node — escalate to whom?", "back": "Oncology — suggests active malignancy"},
             {"front": "Why is profound lymphorrhea dangerous if managed with bandages alone?", "back": "It's a major risk for sepsis; needs advanced absorbent dressings and possibly wound nursing/antibiotics"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A patient presents with a sudden, hard, fixed, non-mobile supraclavicular lymph node. What is the appropriate action?", "options": ["Continue MLD as planned", "Refer to oncology — suggests possible malignant recurrence", "Refer to vascular surgery", "Document and reassess in 4 weeks"], "answer": 1}
+          ]
         },
         {
           "id": "a8",
@@ -191,7 +196,9 @@
           "flashcards": [
             {"front": "Why must sensory screening precede compression bandaging?", "back": "Absence of protective sensation risks silent pressure necrosis under bandages; requires padding + visual skin check education"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "Before applying compression bandaging to a patient with a history of taxane chemotherapy, what must be assessed first?", "options": ["Blood pressure", "Sensory screening (light touch, pinprick, vibration) for peripheral neuropathy", "Body mass index", "Visual acuity"], "answer": 1}
+          ]
         },
         {
           "id": "a10",
@@ -210,7 +217,9 @@
             {"front": "What circumferential difference between limbs is clinically significant for unilateral lymphedema?", "back": ">2 cm at multiple anatomical landmarks"},
             {"front": "Why must you separate the toes during skin inspection?", "back": "To check for tinea pedis — the primary portal of entry for recurrent cellulitis"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "Which finding is most specific for identifying a fungal portal of entry that predisposes to recurrent cellulitis?", "options": ["Circumferential asymmetry >2cm", "Hemosiderin staining", "Tinea pedis found on separating the toes", "Loss of Achilles sulcus"], "answer": 2}
+          ]
         },
         {
           "id": "a11",
@@ -229,7 +238,9 @@
             {"front": "What three skin findings together confirm ISL Stage III?", "back": "Extensive papillomatosis, hyperkeratosis, and deep cutaneous folds"},
             {"front": "How does lymphorrhea differ from venous ulcer exudate?", "back": "Lymphorrhea is highly proteinaceous, clear-to-amber, beads rapidly from intact-appearing skin/tiny vesicles"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A patient's lower limb shows extensive papillomatosis, hyperkeratosis, and deep skin folds. This combination is diagnostic of:", "options": ["ISL Stage I", "ISL Stage II", "ISL Stage III (Lymphostatic Elephantiasis)", "Venous stasis dermatitis"], "answer": 2}
+          ]
         },
         {
           "id": "a12",
@@ -268,7 +279,9 @@
             {"front": "Pitting grade 3+: depth and rebound time?", "back": "~6mm depth, rebound >1 minute"},
             {"front": "Is lipedema typically pitting or non-pitting?", "back": "Non-pitting from the outset"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A patient has non-pitting edema on physical exam. Which of the following is true?", "options": ["This rules out edema entirely", "Both advanced lymphedema and lipedema can present as non-pitting", "Non-pitting only occurs in venous disease", "Non-pitting always indicates Stage 0"], "answer": 1}
+          ]
         },
         {
           "id": "a14",
@@ -305,7 +318,9 @@
           "flashcards": [
             {"front": "What is Axillary Web Syndrome and its typical cause?", "back": "Visible/palpable tight fibrous cords from axilla to medial arm, common after breast cancer surgery, limits shoulder abduction/flexion"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A breast cancer surgery patient has visible tight fibrous cords running from the axilla down the medial arm, limiting shoulder abduction. This is:", "options": ["Frozen shoulder (capsular pattern)", "Axillary Web Syndrome (cording)", "Rotator cuff tear", "Normal post-op scarring"], "answer": 1}
+          ]
         },
         {
           "id": "a16",
@@ -322,7 +337,9 @@
           "flashcards": [
             {"front": "Most critical functional decline markers in upper extremity lymphedema?", "back": "Impairment of finger function and thumb opposition"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "In upper extremity lymphedema, which functional markers are most critical to track for decline?", "options": ["Shoulder external rotation only", "Finger function and thumb opposition", "Grip strength alone", "Elbow flexion range"], "answer": 1}
+          ]
         },
         {
           "id": "a17",
@@ -340,7 +357,9 @@
           "flashcards": [
             {"front": "Why is LYMQOL preferred over DASH for lymphedema patients with distress?", "back": "LYMQOL also captures body image and psychological distress, not just physical function"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "Why would LYMQOL be preferred over DASH for a lymphedema patient reporting significant psychological distress and body image concerns?", "options": ["LYMQOL is faster to administer", "LYMQOL captures physical function, symptoms, body image, and psychological distress; DASH is orthopedic-focused", "DASH is not validated", "There is no difference"], "answer": 1}
+          ]
         }
       ]
     },
@@ -364,7 +383,9 @@
             {"front": "Phase 1 CDT duration and driver?", "back": "Clinic-driven, daily sessions, typically 2-4 weeks"},
             {"front": "Realistic primary goal for advanced fibrotic Stage III lymphedema?", "back": "Prevent recurrent cellulitis and restore functional mobility — NOT full symmetry/cure"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "What is a realistic primary goal for a patient with advanced fibrotic ISL Stage III lymphedema?", "options": ["Complete reversal to normal limb symmetry", "Preventing recurrent cellulitis and restoring functional mobility", "Discharge from care immediately", "Weight loss surgery referral"], "answer": 1}
+          ]
         },
         {
           "id": "i19",
@@ -401,7 +422,9 @@
           "flashcards": [
             {"front": "Sequencing rule: MLD vs. deep tissue mobilization for fibrotic tissue/AWS release?", "back": "MLD (central clearance) must happen first, before deep soft tissue mobilization"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "When treating fibrotic tissue or releasing Axillary Web Syndrome cording, what is the correct sequencing?", "options": ["Deep tissue mobilization first, then MLD", "MLD (central clearance) first, then deep soft tissue mobilization", "They must be done simultaneously", "Sequencing does not matter"], "answer": 1}
+          ]
         },
         {
           "id": "i21",
@@ -439,7 +462,9 @@
           "flashcards": [
             {"front": "Why is elevation ineffective for Stage III lymphedema?", "back": "The limb mass is mostly solid fibroadipose tissue, which doesn't respond to gravity"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A patient with ISL Stage III lower limb lymphedema asks if nightly leg elevation alone is a sufficient care plan. What should you tell them?", "options": ["Yes, elevation alone is sufficient at any stage", "No — Stage III tissue is largely solid fibroadipose tissue that doesn't respond to gravity", "Elevation is contraindicated in Stage III", "Elevation only works if done for 5 minutes"], "answer": 1}
+          ]
         },
         {
           "id": "i23",
@@ -477,7 +502,9 @@
           "flashcards": [
             {"front": "Leading portal of entry for recurrent cellulitis in lower limb lymphedema?", "back": "Untreated tinea pedis (athlete's foot)"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "What is the leading portal of entry for recurrent cellulitis in lower limb lymphedema that patient education should specifically target?", "options": ["Untreated tinea pedis (athlete's foot)", "Dry elbow skin", "Scalp dermatitis", "Nail polish use"], "answer": 0}
+          ]
         },
         {
           "id": "i25",
@@ -494,7 +521,9 @@
           "flashcards": [
             {"front": "Benchmark limb volume reduction indicating successful decongestion?", "back": "10% reduction in relative limb volume (or L-Dex back below 6.5)"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "Why must baseline circumferential/volume measurements be documented before starting MLD?", "options": ["It is optional but nice to have", "Without a baseline, treatment efficacy cannot be proven — a clinical governance requirement", "Only needed for insurance billing", "Baseline measurements are taken after Phase 1 ends"], "answer": 1}
+          ]
         }
       ]
     },
@@ -517,7 +546,9 @@
           "flashcards": [
             {"front": "What common experience do lipedema patients often report from prior healthcare providers?", "back": "Medical gaslighting — being told to just diet/exercise more, despite it being a distinct diet-resistant disorder"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "A lipedema patient reports being repeatedly told by past providers to 'just diet and exercise more.' What is the appropriate response?", "options": ["Agree and reinforce a stricter diet plan", "Validate that lipedema is a distinct, diet-resistant connective tissue disorder, not a failure of willpower", "Refer immediately to bariatric surgery", "Tell the patient the previous advice was correct"], "answer": 1}
+          ]
         },
         {
           "id": "att27",
@@ -545,7 +576,7 @@
           "title": "Professional Accountability",
           "key_facts": [
             "Credentials require Primary Source Verification (PSV) via DataFlow Group",
-            "DHA mandates 20 accredited CPD points annually for license renewal",
+            "DHA mandates 10 accredited CPD points per year for Allied Health license renewal (i.e. 20 points for a 2-year license cycle) — logged via the Sheryan portal",
             "Passing the Prometric exam only yields an Eligibility Letter — active license requires linking to a DHA-licensed employing facility via the Sheryan portal"
           ],
           "pitfalls": [
@@ -553,10 +584,12 @@
           ],
           "sources": ["DHA licensing documentation"],
           "flashcards": [
-            {"front": "How many CPD points must DHA-licensed Allied Health Professionals log annually?", "back": "20 accredited CPD points"},
+            {"front": "How many CPD points must DHA-licensed Allied Health Professionals log per year?", "back": "10 accredited CPD points/year (20 total for a 2-year license cycle), tracked via Sheryan"},
             {"front": "What does passing the Prometric exam alone grant?", "back": "Only an Eligibility Letter — not an active license (requires facility linkage via Sheryan)"}
           ],
-          "quiz_questions": []
+          "quiz_questions": [
+            {"question": "How many CPD points must a DHA-licensed Allied Health Professional log per year to remain eligible for license renewal?", "options": ["5 points/year", "10 points/year (20 total for a 2-year license cycle)", "20 points/year fixed, regardless of license duration", "50 points/year"], "answer": 1}
+          ]
         }
       ]
     }
@@ -575,7 +608,7 @@
     {"item": "19. MLD Schools", "fact": "Vodder: 30mmHg circular. Casley-Smith: effleurage over lymphotomes. Foldi: medical CDT focus."},
     {"item": "21. Compression", "fact": "Short-stretch bandage: high working pressure, low resting pressure — safe for overnight wear."},
     {"item": "23. Exercise", "fact": "Diaphragmatic breathing creates negative intra-thoracic pressure, pumping the central thoracic duct."},
-    {"item": "28. UAE/DHA Scope", "fact": "Autonomous practice within scope; 20 CPD points/year required for license renewal."}
+    {"item": "28. UAE/DHA Scope", "fact": "Autonomous practice within scope; 10 CPD points/year required for license renewal (20 for a 2-year cycle)."}
   ],
   "reference_tables": [
     {
@@ -607,6 +640,26 @@
         ["Long-Stretch", "High (>140%)", "High (ischemia risk)", "Low (yields to contraction)", "Orthopedic support only, NOT CDT"]
       ]
     }
+  ],
+  "further_reading": [
+    {"domain": "Knowledge", "title": "ISL 2023 Consensus Document — The Diagnosis and Treatment of Peripheral Lymphedema", "url": "https://isl.arizona.edu/sites/default/files/2024-11/THE-DIAGNOSIS-AND-TREATMENT-OF-PERIPHERAL-LYMPHEDEMA-2023-CONSENSUS-DOCUMENT-OF-THE-INTERNATIONAL-SOCIETY-OF-LYMPHOLOGY.pdf", "note": "The primary source for ISL staging (0-III), anatomy/physiology, and CDT indications — cite this, not a summary, if an assessor asks for a source"},
+    {"domain": "Knowledge", "title": "Lymphedema — StatPearls (NCBI Bookshelf)", "url": "https://www.ncbi.nlm.nih.gov/books/NBK537239/", "note": "Free, concise clinical overview of pathophysiology, staging, and management — good first-pass read"},
+    {"domain": "Knowledge", "title": "Lipedema Foundation — Staging of Lipedema", "url": "https://www.lipedema.org/staging", "note": "Authoritative current staging reference (Types I-V, Stages 1-3), reflects the retirement of 'Stage 4' in favor of lipo-lymphedema"},
+    {"domain": "Knowledge", "title": "Herbst et al. — Standard of Care for Lipedema in the United States", "url": "https://alltomlipodem.se/wp-content/uploads/2022/02/Herbst-2021-standard-care.pdf", "note": "Full standard-of-care consensus paper behind the lipedema staging/diagnosis criteria"},
+    {"domain": "Knowledge", "title": "Lipedema: Clinical Features, Diagnosis, and Management (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12081092/", "note": "Peer-reviewed review — useful for the lipedema vs. lymphedema vs. venous edema differential"},
+    {"domain": "Assessment", "title": "Wounds UK — Disease Progression in Venous and Lymphovenous Disease", "url": "https://wounds-uk.com/wp-content/uploads/2023/02/content_9223.pdf", "note": "Early identification/red-flag framework for venous-lymphatic overlap presentations"},
+    {"domain": "Assessment", "title": "Wounds UK — Best Practice Statement: Compression Hosiery", "url": "https://wounds-uk.com/wp-content/uploads/2023/02/57d6046a0d7ea78126c844b859b0a61e.pdf", "note": "Source for ABI-based compression decision-making — confirm which ABI cutoffs your program teaches against this"},
+    {"domain": "Assessment", "title": "Bioimpedance Spectroscopy for BCRL Assessment: Clinical Practice Guidelines (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9883343/", "note": "Backs the L-Dex +6.5-10 subclinical threshold and BIS limitations in fibrotic (Stage III) tissue"},
+    {"domain": "Assessment", "title": "PREVENT Trial — Bioimpedance Spectroscopy vs. Tape Measure (ClinicalTrials.gov)", "url": "https://clinicaltrials.gov/study/NCT02167659", "note": "Registered trial comparing BIS to circumferential measurement for early lymphedema detection"},
+    {"domain": "Intervention", "title": "Wittlinger Lymphedema Clinic — Manual Lymph Drainage Information (Vodder method)", "url": "https://www.lymphedema-clinic.com/fileadmin/pdf/pdf_english/Information_ManualLymphDrainage-2.6.3.3-NA-JW.pdf", "note": "Primary-source description of Vodder MLD principles, stroke direction, and pressure"},
+    {"domain": "Intervention", "title": "Is the Absence of MLD-Based Treatment in Lymphedema After Breast Cancer Harmful? Randomized Crossover Study (MDPI)", "url": "https://www.mdpi.com/2077-0383/13/2/402", "note": "Recent RCT-level evidence on MLD's actual contribution to CDT outcomes"},
+    {"domain": "Intervention", "title": "Dynamic Angular Petrissage for Axillary Web Syndrome — Case Report (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4868506/", "note": "Technique detail for AWS/cording release referenced in the ROM assessment item"},
+    {"domain": "Intervention", "title": "Wounds International — Does Breathing Have an Influence on Lymphatic Drainage?", "url": "https://woundsinternational.com/wp-content/uploads/2023/02/content_11070.pdf", "note": "Evidence behind the diaphragmatic breathing / thoracic duct pump mechanism"},
+    {"domain": "Intervention", "title": "Schmitz et al. 2010 — Weight Lifting in Women with Breast-Cancer-Related Lymphedema (NEJM, the PAL trial)", "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa0810118", "note": "Landmark trial establishing that supervised progressive weightlifting is safe — the direct evidence behind the 'weightlifting myth' pitfall"},
+    {"domain": "Attitude / UAE Scope of Practice", "title": "DHA — Scope of Practice for Physiotherapist (SP-07, official PDF)", "url": "https://www.dha.gov.ae/uploads/102023/SOP%20for%20Physiotherapist20231054969.pdf", "note": "The actual governing document — read this directly rather than relying on a secondary summary"},
+    {"domain": "Attitude / UAE Scope of Practice", "title": "DHA — Standards for Physiotherapy Services (official PDF)", "url": "https://dha.gov.ae/uploads/062023/Standards%20Physiotherapy%20Service%20Final%202023625844.pdf", "note": "MDT referral requirements, documentation standards, goal-setting expectations"},
+    {"domain": "Attitude / UAE Scope of Practice", "title": "DHA — Standards for Code of Ethics and Professional Conduct for Health Professionals", "url": "https://dha.gov.ae/uploads/012026/Standards%20for%20Code%20of%20Ethics%20and%20Professional%20Conduct%20for%20Health%20Professionals%20V1%20202613351.pdf", "note": "Underpins the Attitude domain — communication, accountability, scope adherence"},
+    {"domain": "Attitude / UAE Scope of Practice", "title": "DHA — Professional Qualification Requirements (PQR), April 2025", "url": "https://services.dha.gov.ae/sheryan/wps/contenthandler/war/SheryanHomeThemeStatic/themes/Portal8.5/docs/PQR_April_2025.pdf", "note": "Confirm current CPD point requirements and license-cycle rules directly from this before quoting a number to an assessor — these figures are updated periodically"}
   ],
   "assessor_probe_questions": [
     {"question": "Patient has ABI of 0.6 — compression approach?", "model_answer": "ABI 0.6 = moderate PAD. ABI<0.5 is absolute contraindication; 0.5-0.8 allows modified short-stretch compression, max 30-40mmHg, with heavy padding and monitoring for ischemia."},

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { rapidRecall, referenceTables } from "@/data/cdt";
+import { rapidRecall, referenceTables, furtherReading } from "@/data/cdt";
 import { PageShell } from "@/components/PageShell";
 
 export const Route = createFileRoute("/rapid-recall")({
@@ -8,8 +8,7 @@ export const Route = createFileRoute("/rapid-recall")({
       { title: "Rapid Recall — CDT Study" },
       {
         name: "description",
-        content:
-          "One-page rapid recall cheat sheet and reference tables for CDT exam prep.",
+        content: "One-page rapid recall cheat sheet and reference tables for CDT exam prep.",
       },
     ],
   }),
@@ -26,14 +25,9 @@ function RapidRecall() {
       <div className="overflow-hidden rounded-xl border border-border bg-card">
         <dl className="divide-y divide-border">
           {rapidRecall.map((r, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-3 px-4 py-3"
-            >
+            <div key={i} className="grid grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-3 px-4 py-3">
               <dt className="text-sm font-semibold text-foreground">{r.item}</dt>
-              <dd className="text-sm leading-relaxed text-muted-foreground">
-                {r.fact}
-              </dd>
+              <dd className="text-sm leading-relaxed text-muted-foreground">{r.fact}</dd>
             </div>
           ))}
         </dl>
@@ -49,9 +43,7 @@ function RapidRecall() {
             className="overflow-hidden rounded-xl border border-border bg-card"
           >
             <div className="border-b border-border bg-secondary px-4 py-2">
-              <h3 className="text-sm font-semibold text-secondary-foreground">
-                {t.title}
-              </h3>
+              <h3 className="text-sm font-semibold text-secondary-foreground">{t.title}</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-full border-collapse text-xs">
@@ -86,6 +78,44 @@ function RapidRecall() {
                 </tbody>
               </table>
             </div>
+          </section>
+        ))}
+      </div>
+
+      <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        Further reading
+      </h2>
+      <p className="mb-4 text-sm text-muted-foreground">
+        Primary sources behind the content above — official DHA documents, peer-reviewed
+        literature, and consensus guidelines. Verify anything with a specific number or
+        regulatory citation against these directly before quoting it to an assessor.
+      </p>
+      <div className="flex flex-col gap-6">
+        {Object.entries(
+          furtherReading.reduce<Record<string, typeof furtherReading>>((acc, r) => {
+            (acc[r.domain] ??= []).push(r);
+            return acc;
+          }, {}),
+        ).map(([domain, items]) => (
+          <section key={domain} className="overflow-hidden rounded-xl border border-border bg-card">
+            <div className="border-b border-border bg-secondary px-4 py-2">
+              <h3 className="text-sm font-semibold text-secondary-foreground">{domain}</h3>
+            </div>
+            <ul className="divide-y divide-border">
+              {items.map((r) => (
+                <li key={r.url} className="px-4 py-3">
+                  <a
+                    href={r.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-sm font-medium text-foreground underline underline-offset-2 hover:text-primary"
+                  >
+                    {r.title}
+                  </a>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{r.note}</p>
+                </li>
+              ))}
+            </ul>
           </section>
         ))}
       </div>

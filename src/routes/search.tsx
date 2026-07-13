@@ -50,9 +50,7 @@ function SearchPage() {
       {!q ? (
         <p className="text-sm text-muted-foreground">Type a query to search.</p>
       ) : hits.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
-          No matches for &ldquo;{q}&rdquo;.
-        </p>
+        <p className="text-sm text-muted-foreground">No matches for &ldquo;{q}&rdquo;.</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {hits.map((h) => (
@@ -65,13 +63,9 @@ function SearchPage() {
                 <div className="text-[11px] font-semibold uppercase tracking-widest text-primary">
                   {h.domainName}
                 </div>
-                <div className="mt-0.5 text-sm font-medium text-card-foreground">
-                  {h.itemTitle}
-                </div>
+                <div className="mt-0.5 text-sm font-medium text-card-foreground">{h.itemTitle}</div>
                 {h.snippet ? (
-                  <div className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                    {h.snippet}
-                  </div>
+                  <div className="mt-1 line-clamp-2 text-xs text-muted-foreground">{h.snippet}</div>
                 ) : null}
               </Link>
             </li>

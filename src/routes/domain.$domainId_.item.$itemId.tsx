@@ -7,7 +7,7 @@ import { FlashcardDeck } from "@/components/FlashcardDeck";
 import { QuizRunner } from "@/components/QuizRunner";
 import { cardKey } from "@/lib/progress";
 
-export const Route = createFileRoute("/domain/$domainId/item/$itemId")({
+export const Route = createFileRoute("/domain/$domainId_/item/$itemId")({
   loader: ({ params }) => {
     const res = getItem(params.domainId, params.itemId);
     if (!res) throw notFound();
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/domain/$domainId/item/$itemId")({
       {
         name: "description",
         content: loaderData
-          ? loaderData.item.key_facts[0] ?? loaderData.item.title
+          ? (loaderData.item.key_facts[0] ?? loaderData.item.title)
           : "CDT study topic",
       },
     ],
@@ -36,18 +36,13 @@ function ItemView() {
   const { domain, item } = Route.useLoaderData();
   const explanations = item.quiz_questions.map(() => item.key_facts[0]);
   return (
-    <PageShell
-      title={item.title}
-      back={{ to: "/domain/$domainId", label: domain.name }}
-    >
+    <PageShell title={item.title} back={{ to: "/domain/$domainId", label: domain.name }}>
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="flashcards">
             Flashcards
-            <span className="ml-1 text-[10px] text-muted-foreground">
-              {item.flashcards.length}
-            </span>
+            <span className="ml-1 text-[10px] text-muted-foreground">{item.flashcards.length}</span>
           </TabsTrigger>
           <TabsTrigger value="quiz">
             Quiz
@@ -65,10 +60,7 @@ function ItemView() {
             <ul className="space-y-2 rounded-lg border border-border bg-card p-4 text-sm leading-relaxed text-card-foreground">
               {item.key_facts.map((f: string, i: number) => (
                 <li key={i} className="flex gap-3">
-                  <span
-                    aria-hidden
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                  />
+                  <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                   <span>{f}</span>
                 </li>
               ))}
