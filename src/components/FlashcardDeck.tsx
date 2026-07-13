@@ -76,42 +76,44 @@ export function FlashcardDeck({
       </div>
 
       <div 
-        className="group relative min-h-64 w-full cursor-pointer"
+        className="group relative w-full cursor-pointer"
         style={{ perspective: "1000px" }}
         onClick={() => setFlipped(!flipped)}
       >
         <motion.div
-          className="relative h-full w-full rounded-xl border border-border bg-card p-6 text-center text-card-foreground shadow-sm transition-colors hover:border-primary/40"
+          className="relative w-full rounded-xl border border-border bg-card text-center text-card-foreground shadow-sm transition-colors hover:border-primary/40"
           animate={{ rotateX: flipped ? 180 : 0 }}
           transition={{ duration: 0.4, type: "spring", stiffness: 260, damping: 20 }}
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* Front */}
-          <div 
-            className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
-            style={{ backfaceVisibility: "hidden" }}
-          >
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-              Question
-            </span>
-            <p className="text-lg leading-relaxed sm:text-xl">{card.front}</p>
-            <span className="mt-2 text-xs text-muted-foreground">
-              Tap or press Space to reveal answer
-            </span>
-          </div>
+          <div className="grid">
+            {/* Front */}
+            <div 
+              className="col-start-1 row-start-1 flex min-h-64 flex-col items-center justify-center gap-3 p-6 sm:p-8"
+              style={{ backfaceVisibility: "hidden" }}
+            >
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Question
+              </span>
+              <p className="text-lg leading-relaxed sm:text-xl">{card.front}</p>
+              <span className="mt-2 text-xs text-muted-foreground">
+                Tap or press Space to reveal answer
+              </span>
+            </div>
 
-          {/* Back */}
-          <div 
-            className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
-            style={{ backfaceVisibility: "hidden", transform: "rotateX(180deg)" }}
-          >
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
-              Answer
-            </span>
-            <p className="text-lg leading-relaxed sm:text-xl">{card.back}</p>
-            <span className="mt-2 text-xs text-muted-foreground">
-              1 / &larr; to Review | 2 / &rarr; for Got it
-            </span>
+            {/* Back */}
+            <div 
+              className="col-start-1 row-start-1 flex min-h-64 flex-col items-center justify-center gap-3 p-6 sm:p-8"
+              style={{ backfaceVisibility: "hidden", transform: "rotateX(180deg)" }}
+            >
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
+                Answer
+              </span>
+              <p className="text-lg leading-relaxed sm:text-xl">{card.back}</p>
+              <span className="mt-2 text-xs text-muted-foreground">
+                1 / &larr; to Review | 2 / &rarr; for Got it
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>
